@@ -1,8 +1,8 @@
-package com.icecola.simplemq.utils;
+package com.icecola.simplemq.config;
 
 /**
  * description:
- * 配置文件读取
+ * 配置文件Config
  *
  * @author liuxingxing
  * @date 2021.05.17 22:52
