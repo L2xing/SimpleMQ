@@ -1,10 +1,12 @@
 package com.icecola.simplemq.utils;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import cn.hutool.core.getter.BasicTypeGetter;
+import cn.hutool.setting.dialect.Props;
+import cn.hutool.setting.dialect.PropsUtil;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 
 /**
  * description:
@@ -15,45 +17,82 @@ import java.util.HashMap;
  */
 public class PropsUtils {
 
-    private final String props = "classpath:simplemq.yml";
+    private static String propsDir = "classpath:simplemq.properties";
 
-    private HashMap<String, Object> map = new HashMap<>();
-
-    private void buildMap() {
-        YAMLFactory.FORMAT_NAME_JSON
-    }
+    private volatile static Props props = null;
 
     /**
      * Description:
+     * 属性文件工具类
      *
-     * @param key:
-     * @param type:
-     * @return T
+     * @return cn.hutool.setting.dialect.Props
      * @author liuxingxing
-     * @date 2021-05-18 23:41
+     * @date 2021-05-19 23:12
      **/
-    public <T> T getProp(String key, Class<T> type) {
-        Object o = map.get(key);
-        if (ObjectUtil.isNull(o)) {
-            return null;
+    private static Props getPropsUtil() {
+        if (props == null) {
+            synchronized (PropsUtils.class) {
+                if (props == null) {
+                    props = PropsUtil.get(propsDir);
+                }
+            }
         }
-        if (o.getClass() != type) {
-            return null;
-        }
-        return (T) o;
+        return props;
     }
 
-    /**
-     * Description:
-     *
-     * @param key:
-     * @return java.lang.Object
-     * @author liuxingxing
-     * @date 2021-05-18 23:41
-     **/
-    public Object getProp(String key) {
-        return map.get(key);
+    public static Object getObj(String key) {
+        return getPropsUtil().getObj(key);
     }
 
+    public static String getStr(String key) {
+        return getPropsUtil().getStr(key);
+    }
 
+    public static Integer getInt(String key) {
+        return getPropsUtil().getInt(key);
+    }
+
+    public static Short getShort(String key) {
+        return getPropsUtil().getShort(key);
+    }
+
+    public static Boolean getBool(String key) {
+        return getPropsUtil().getBool(key);
+    }
+
+    public static Long getLong(String key) {
+        return getPropsUtil().getLong(key);
+    }
+
+    public static Character getChar(String key) {
+        return getPropsUtil().getChar(key);
+    }
+
+    public static Float getFloat(String key) {
+        return getPropsUtil().getFloat(key);
+    }
+
+    public static Double getDouble(String key) {
+        return getPropsUtil().getDouble(key);
+    }
+
+    public static Byte getByte(String key) {
+        return getPropsUtil().getByte(key);
+    }
+
+    public static BigDecimal getBigDecimal(String key) {
+        return getPropsUtil().getBigDecimal(key);
+    }
+
+    public static BigInteger getBigInteger(String key) {
+        return getPropsUtil().getBigInteger(key);
+    }
+
+    public static <E extends Enum<E>> E getEnum(Class<E> clazz, String key) {
+        return getPropsUtil().getEnum(clazz, key);
+    }
+
+    public static Date getDate(String key) {
+        return getPropsUtil().getDate(key);
+    }
 }
