@@ -32,7 +32,6 @@ public class ThreadFactorTest {
         });
         System.out.println(i);
         System.out.println("开始");
-        Queue
     }
 
 }

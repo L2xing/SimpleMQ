@@ -14,10 +14,22 @@
         <hutool.version>5.6.5</hutool.version>
         <lombok.versiom>1.18.20</lombok.versiom>
         <propsReader>2.9.8</propsReader>
+        <log.version>1.7.5</log.version>
     </properties>
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -32,7 +44,7 @@
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${propsReader}</version>
         </dependency>
         <dependency>
