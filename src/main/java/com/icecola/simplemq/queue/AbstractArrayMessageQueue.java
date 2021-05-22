@@ -107,7 +107,7 @@ public abstract class AbstractArrayMessageQueue extends AbstractBasicMessageQueu
         } catch (Exception e) {
             log.error("【消息队列 获取队列大小错误】：", e);
         } finally {
-            writeLock.unlock();
+            readLock.unlock();
         }
         return num;
     }

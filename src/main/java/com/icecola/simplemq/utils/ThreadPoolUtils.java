@@ -8,6 +8,7 @@ import java.util.concurrent.*;
 
 /**
  * description:
+ * 线程池工具类
  *
  * @author liuxingxing
  * @date 2021.05.17 22:44
