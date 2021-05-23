@@ -15,11 +15,16 @@
         <lombok.versiom>1.18.20</lombok.versiom>
         <propsReader>2.9.8</propsReader>
         <log.version>1.7.5</log.version>
+        <netty.version>4.1.15.Final</netty.version>
     </properties>
 
 
     <dependencies>
-
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

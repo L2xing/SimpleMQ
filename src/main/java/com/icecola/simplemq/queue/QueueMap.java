@@ -86,4 +86,21 @@ public class QueueMap {
         return topics;
     }
 
+    /**
+     * Description:
+     * 获取topic下的消息数量
+     * @param topic
+     * @return java.lang.Integer
+     * @author liuxingxing23@jd.com
+     * @date 2021/5/23 19:41
+     **/
+    public synchronized Integer getMessageInTopic(String topic) {
+        ArrayMessageQueue arrayMessageQueue = map.get(topic);
+        if (ObjectUtil.isNotNull(arrayMessageQueue)) {
+            return arrayMessageQueue.getQueueSize();
+        } else {
+            log.error("【QueueMap 获取队列失败】：topic:{} 不存在。", topic);
+            return 0;
+        }
+    }
 }
