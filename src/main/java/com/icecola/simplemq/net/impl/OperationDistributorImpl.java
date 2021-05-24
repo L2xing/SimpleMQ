@@ -25,30 +25,57 @@ public class OperationDistributorImpl implements IOperationDistributor {
         Protocol reProtocol = null;
         switch (operateEnum) {
             case CAT:
-                break;
+                return handleCat(protocol);
             case DEQUEUE:
-                break;
+                return handleDequeue(protocol);
             case ENQUEUE:
-                break;
+                return handleEnqueue(protocol);
             default:
                 break;
         }
-
         return reProtocol;
     }
 
+    /**
+     * Description:
+     * 查看主题
+     *
+     * @param protocol:
+     * @return com.icecola.simplemq.net.bean.Protocol
+     * @author liuxingxing
+     * @date 2021-05-24 22:29
+     **/
     private Protocol handleCat(Protocol protocol) {
         Integer messageInTopic = queueMap.getMessageInTopic(protocol.getTopic());
         return Protocol.buildResponse(protocol.getTopic(), messageInTopic);
     }
 
+    /**
+     * Description:
+     * 出队
+     *
+     * @param protocol:
+     * @return com.icecola.simplemq.net.bean.Protocol
+     * @author liuxingxing
+     * @date 2021-05-24 22:29
+     **/
     private Protocol handleDequeue(Protocol protocol) {
         Message consume = queueMap.consume(protocol.getTopic());
         return Protocol.buildResponse(protocol.getTopic(), consume);
     }
 
+    /**
+     * Description:
+     * 入队
+     *
+     * @param protocol:
+     * @return com.icecola.simplemq.net.bean.Protocol
+     * @author liuxingxing
+     * @date 2021-05-24 22:29
+     **/
     private Protocol handleEnqueue(Protocol<Message> protocol) {
         queueMap.produce(protocol.getData(), protocol.getTopic());
         return Protocol.buildResponse(protocol.getTopic(), null);
     }
+    
 }

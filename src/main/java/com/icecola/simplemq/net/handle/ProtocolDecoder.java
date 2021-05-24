@@ -1,7 +1,9 @@
 package com.icecola.simplemq.net.handle;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.icecola.simplemq.net.bean.Protocol;
+import com.icecola.simplemq.queue.Message;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,10 @@ public class ProtocolDecoder extends MessageToMessageDecoder<String> {
     protected void decode(ChannelHandlerContext ctx, String msg, List<Object> out) throws Exception {
         try {
             Protocol protocol = JSONUtil.toBean(msg, Protocol.class);
+            if (protocol.getData() instanceof JSONObject){
+                Message message = JSONUtil.toBean((JSONObject) protocol.getData(), Message.class);
+                protocol.setData(message);
+            }
             out.add(protocol);
         } catch (Exception e) {
             log.info("【自定义协议转化器异常】：", e);

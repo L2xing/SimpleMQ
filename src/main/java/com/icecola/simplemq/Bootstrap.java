@@ -23,7 +23,7 @@ public class Bootstrap {
 
     public static void main(String[] args) {
         // 一个服务线程
-        Server.start();
+        new Thread(() -> Server.start()).start();
     }
 
 
