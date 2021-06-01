@@ -75,7 +75,7 @@ public class OperationDistributorImpl implements IOperationDistributor {
      **/
     private Protocol handleEnqueue(Protocol<Message> protocol) {
         queueMap.produce(protocol.getData(), protocol.getTopic());
-        return Protocol.buildResponse(protocol.getTopic(), null);
+        return Protocol.buildResponse(protocol.getTopic(), "200");
     }
-    
+
 }
